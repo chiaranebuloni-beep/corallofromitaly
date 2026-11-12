@@ -31,16 +31,27 @@ const archivo = Archivo({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://www.corallofromitaly.com'),
+  // quando il dominio sarà collegato: impostare NEXT_PUBLIC_SITE_URL=https://www.corallofromitaly.com
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://corallofromitaly.vercel.app'),
   title: 'Corallo from Italy — Taste of Tradition',
   description:
     'Corallo from Italy: truffle bites siciliani modellati a mano. Cacao, pistacchio, nocciola e caramello. Tre generazioni di tradizione, ribaltate.',
   icons: { icon: '/favicon.svg' },
   openGraph: {
     title: 'Corallo from Italy — Taste of Tradition',
-    description: 'Truffle bites siciliani modellati a mano.',
-    images: ['/img/luigi-trio.webp'],
+    description: 'Truffle bites siciliani modellati a mano: cacao, pistacchio, nocciola e caramello.',
+    siteName: 'Corallo from Italy',
+    locale: 'it_IT',
+    type: 'website',
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'Corallo from Italy — Taste of Tradition' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Corallo from Italy — Taste of Tradition',
+    description: 'Truffle bites siciliani modellati a mano.',
+    images: ['/og.jpg'],
+  },
+  appleWebApp: { title: 'Corallo' },
 };
 
 export const viewport = { themeColor: '#e63329' };
