@@ -26,13 +26,11 @@ export default function HeroB({ ready }) {
       const s = svg.current;
 
       const tl = gsap.timeline();
-      tl.from('.heroB__letter', {
-        yPercent: 120,
-        rotation: (i) => (i % 2 ? 12 : -12),
-        stagger: 0.06,
-        duration: 1,
-        ease: 'back.out(1.7)',
-      })
+      tl.fromTo(
+        '.heroB__letter',
+        { y: 80, opacity: 0, rotation: (i) => (i % 2 ? 8 : -8) },
+        { y: 0, opacity: 1, rotation: 0, stagger: 0.06, duration: 0.9, ease: 'back.out(1.6)' }
+      )
         .from('.heroB__sticker', { scale: 0, rotation: -40, duration: 1.1, ease: 'elastic.out(1, 0.55)' }, 0.3)
         .add(luigiAssemble(s), 0.4)
         .from('.heroB__chip', { scale: 0, rotation: (i) => (i ? 30 : -30), duration: 0.7, stagger: 0.1, ease: 'back.out(2.5)' }, 1)
