@@ -30,18 +30,10 @@ export default function About() {
         ease: 'power3.out',
         scrollTrigger: { trigger: '.about__text', start: 'top 85%' },
       });
-      gsap.utils.toArray('.about__photo').forEach((el, i) => {
-        gsap.fromTo(
-          el,
-          { yPercent: 20 + i * 15, rotation: i ? 8 : -6 },
-          {
-            yPercent: -20 - i * 15,
-            rotation: i ? -4 : 3,
-            ease: 'none',
-            scrollTrigger: { trigger: '.about__photos', start: 'top bottom', end: 'bottom top', scrub: true },
-          }
-        );
-      });
+      // la foto entra inclinata e si raddrizza; il tartufo davanti ruota
+      gsap.fromTo('.about__card', { rotation: -9, y: 80 }, { rotation: -2, y: -20, ease: 'none', scrollTrigger: { trigger: '.about__visual', start: 'top bottom', end: 'bottom 30%', scrub: true } });
+      gsap.fromTo('.about__card img', { scale: 1.15 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.about__visual', start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo('.about__bite', { rotation: -120, y: 120, scale: 0.7 }, { rotation: 60, y: -40, scale: 1, ease: 'none', scrollTrigger: { trigger: '.about__visual', start: 'top bottom', end: 'bottom top', scrub: true } });
       gsap.fromTo('.about__float img', { rotation: -90, y: 80 }, { rotation: 200, y: -120, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'center top', scrub: true } });
       gsap.from('.about__label', { x: -40, opacity: 0, duration: 0.8, scrollTrigger: { trigger: root.current, start: 'top 75%' } });
     },
@@ -70,13 +62,11 @@ export default function About() {
         <Words text={t.about.text} />
       </h2>
       <div className="about__grid">
-        <div className="about__photos">
-          <figure className="about__photo">
-            <img src="/img/post-caffe.webp" alt="Truffle Corallo con caffè" loading="lazy" />
+        <div className="about__visual">
+          <figure className="about__card">
+            <img src="/img/post-morso.webp" alt="Un morso a un truffle al pistacchio Corallo" loading="lazy" />
           </figure>
-          <figure className="about__photo">
-            <img src="/img/post-morso.webp" alt="Un morso a un truffle al pistacchio" loading="lazy" />
-          </figure>
+          <img className="about__bite" src="/img/truffle-pistacchio.webp" alt="" aria-hidden="true" loading="lazy" />
         </div>
         <p className="about__text">
           <Words text={t.about.text2} />

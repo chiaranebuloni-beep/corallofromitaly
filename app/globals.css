@@ -1651,6 +1651,10 @@ blockquote {
   white-space: nowrap;
   pointer-events: none;
 }
+.heroB__word {
+  clip-path: inset(-100vh -100vw 0 -100vw);
+  padding-bottom: 0.1em;
+}
 .heroB__letter {
   display: inline-block;
   will-change: transform;
@@ -2165,5 +2169,39 @@ blockquote {
   }
   .mad__bottom .mad__send {
     flex-wrap: wrap;
+  }
+}
+
+/* foto del morso: carta adesivo inclinata + tartufo davanti */
+.about__visual {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 500px);
+  padding: 20px 40px 60px 0;
+}
+.about__card {
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--white);
+  border: 10px solid var(--white);
+  box-shadow: 0 40px 70px -30px rgba(29, 29, 27, 0.5);
+}
+.about__card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 18px;
+}
+.about__bite {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 38%;
+  max-width: none;
+  filter: drop-shadow(0 26px 30px rgba(29, 29, 27, 0.35));
+}
+@media (max-width: 899px) {
+  .about__visual {
+    width: 86%;
   }
 }
