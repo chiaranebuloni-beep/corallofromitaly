@@ -364,7 +364,7 @@ blockquote {
 }
 .intro__stage {
   position: relative;
-  width: min(400px, 64vw, 46vh);
+  width: min(280px, 52vw, 32vh);
   display: grid;
 }
 .intro__balls {
@@ -723,7 +723,7 @@ blockquote {
 .quote__bloom [data-p='stem'] {
   fill: none;
   stroke: var(--green);
-  stroke-width: 3.1;
+  stroke-width: 3.3;
   stroke-linecap: butt;
   stroke-dasharray: 1 2;
 }
