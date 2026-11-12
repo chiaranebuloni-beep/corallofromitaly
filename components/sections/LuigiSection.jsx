@@ -44,35 +44,7 @@ export default function LuigiSection() {
       gsap.set(cards, { rotation: (i) => TILT[i], y: (i) => i * 10, scale: (i) => 1 - i * 0.04, zIndex: (i) => cards.length - i });
       gsap.set(lessons, { yPercent: (i) => (i ? 100 : 0), opacity: (i) => (i ? 0 : 1) });
 
-      const mm = gsap.matchMedia();
-      mm.add('(min-width: 900px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.deck',
-          start: 'top top',
-          end: () => '+=' + window.innerHeight * (cards.length - 0.5),
-          scrub: 0.6,
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      });
-      // ingresso: il mazzo si apre a ventaglio e si richiude
-      tl.to(cards, { rotation: (i) => (i - 1.5) * 9, x: (i) => (i - 1.5) * 40, duration: 0.5, ease: 'power2.out' })
-        .to(cards, { rotation: (i) => TILT[i], x: 0, duration: 0.4, ease: 'power2.in' });
-      cards.slice(0, -1).forEach((card, i) => {
-        const dir = i % 2 ? 1 : -1;
-        tl.to(card, { x: () => dir * window.innerWidth * 0.12, y: () => -window.innerHeight * 1.15, rotation: dir * 28, duration: 1, ease: 'power2.in' })
-          .to(cards.slice(i + 1), { y: (j) => j * 10, scale: (j) => 1 - j * 0.04, rotation: (j) => (j === 0 ? 0 : TILT[i + 1 + j]), duration: 0.6, ease: 'power2.out' }, '-=0.4')
-          .to(lessons[i], { yPercent: -100, opacity: 0, duration: 0.4 }, '<')
-          .to(lessons[i + 1], { yPercent: 0, opacity: 1, duration: 0.4 }, '<0.1')
-          .to({}, {
-            duration: 0.01,
-            onStart: () => (root.current.querySelector('.deck__count b').textContent = String(i + 2).padStart(2, '0')),
-            onReverseComplete: () => (root.current.querySelector('.deck__count b').textContent = String(i + 1).padStart(2, '0')),
-          }, '<');
-      });
-      tl.to({}, { duration: 0.4 });
-      });
+
     },
     { scope: root, dependencies: [t], revertOnUpdate: true }
   );
@@ -138,7 +110,6 @@ export default function LuigiSection() {
               </p>
             ))}
           </div>
-          <p className="deck__hint">{t.luigi.deckHint}</p>
         </div>
         <button className="deck__next" onClick={nextCard} aria-label={lang === 'en' ? 'Next card' : 'Carta successiva'}>
           <Arrow dir="right" />
