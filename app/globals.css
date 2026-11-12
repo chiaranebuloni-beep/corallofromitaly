@@ -2250,7 +2250,7 @@ a.crow:hover .crow__icon {
   }
 }
 
-/* gusti su mobile: stesso scorrimento orizzontale del desktop, pannelli verticali */
+/* gusti su mobile: stesso scorrimento orizzontale del desktop, pannello pulito */
 @media (max-width: 899px) {
   .flavors__intro {
     flex-basis: 100vw;
@@ -2269,42 +2269,38 @@ a.crow:hover .crow__icon {
   }
   .flavor__name {
     font-size: 15vw;
-    top: 37%;
+    top: calc(var(--header-h) + 64px);
+    margin-top: 0;
   }
   .flavor__truffle {
-    --tw: 44vw;
-    top: 52%;
+    --tw: 58vw;
+    top: 45%;
   }
   .flavor__tins {
-    width: 40vw;
-    right: 4%;
-    top: calc(var(--header-h) + 40px);
-    padding: 6px;
+    width: 36vw;
+    right: 5%;
+    top: 52%;
+    padding: 5px;
     border-radius: 14px;
   }
   .flavor__box {
-    width: 40vw;
-    left: 4%;
-    bottom: auto;
-    top: 60%;
-    padding: 6px;
-    border-radius: 14px;
+    display: none;
   }
   .flavor__info {
     left: var(--gutter);
     right: var(--gutter);
     width: auto;
-    bottom: 20px;
+    bottom: 24px;
   }
   .flavor__desc {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.35;
   }
   .flavor__tag {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .flavor__formats {
-    margin-top: 6px;
+    margin-top: 8px;
     font-size: 11px;
   }
 }
