@@ -2560,3 +2560,25 @@ html {
     gap: 6px;
   }
 }
+
+/* telefoni piccoli (es. iPhone SE) */
+@media (max-width: 899px) {
+  .heroB {
+    min-height: 540px;
+  }
+}
+@media (max-width: 360px) {
+  .header__word {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .header__luigi {
+    height: 32px;
+  }
+  .header__actions {
+    gap: 8px;
+  }
+  .lang__btn {
+    padding: 5px 6px;
+  }
+}
