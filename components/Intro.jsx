@@ -57,7 +57,7 @@ export default function Intro({ onDone, finalColor = 'var(--paper)' }) {
         .add(() => juggle.pause())
         .to('.intro__ball', { y: () => window.innerHeight, rotation: 200, autoAlpha: 0, duration: 0.6, stagger: 0.06, ease: 'power2.in' })
         .to('.intro__luigi', { yPercent: -30, duration: 0.25, ease: 'power2.out' }, '<')
-        .to('.intro__luigi', { yPercent: 160, duration: 0.5, ease: 'power3.in' })
+        .to('.intro__luigi', { y: () => window.innerHeight, autoAlpha: 0, duration: 0.5, ease: 'power3.in' })
         .to('.intro__brand .c, .intro__tag, .intro__num', { yPercent: 110, opacity: 0, duration: 0.4, stagger: 0.01, ease: 'power3.in' }, '<')
         // tartufo che cade al centro
         .fromTo('.intro__drop', { yPercent: -700, scale: 1 }, { yPercent: 0, duration: 0.55, ease: 'power3.in' }, '-=0.2')

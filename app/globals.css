@@ -2461,3 +2461,20 @@ html {
     letter-spacing: 0.03em;
   }
 }
+
+@media (max-width: 899px) {
+  .cta__side > .btn {
+    display: none;
+  }
+  .book__dl {
+    width: 54px;
+    height: 54px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+  }
+}

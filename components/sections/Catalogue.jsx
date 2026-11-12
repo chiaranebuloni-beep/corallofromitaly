@@ -136,6 +136,16 @@ export default function Catalogue() {
               <span className="btn__label">{t.cta.button}</span>
               <span className="btn__icon" aria-hidden="true"><Arrow dir="down" /></span>
             </a>
+            {/* mobile: sfoglia + pulsantino download */}
+            <div className="book__mobile">
+              <button className="book__flip" onClick={() => flip(page === LEAVES.length ? -LEAVES.length : 1)}>
+                {page === LEAVES.length ? (lang === 'en' ? 'Close' : 'Richiudi') : page === 0 ? (lang === 'en' ? 'Flip through' : 'Sfoglia il catalogo') : lang === 'en' ? 'Next page' : 'Pagina successiva'}
+                <Arrow dir="right" />
+              </button>
+              <a className="book__dl" href={CATALOGUE_URL} download aria-label={t.cta.button}>
+                <Arrow dir="down" />
+              </a>
+            </div>
           </div>
         </div>
 
@@ -153,15 +163,6 @@ export default function Catalogue() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="book__mobile">
-            <button className="book__round" onClick={() => flip(-1)} disabled={page === 0} aria-label={lang === 'en' ? 'Previous page' : 'Pagina precedente'}>
-              <Arrow dir="left" />
-            </button>
-            <button className="book__flip" onClick={() => flip(page === LEAVES.length ? -LEAVES.length : 1)}>
-              {page === LEAVES.length ? (lang === 'en' ? 'Close' : 'Richiudi') : lang === 'en' ? 'Flip through' : 'Sfoglia il catalogo'}
-              <Arrow dir="right" />
-            </button>
           </div>
         </div>
       </div>
