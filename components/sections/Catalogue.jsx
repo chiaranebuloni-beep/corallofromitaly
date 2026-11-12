@@ -1,7 +1,8 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
+import Arrow from '../Arrow';
 import { CATALOGUE_URL } from '@/lib/i18n';
 import { Line } from '../Split';
 
@@ -19,7 +20,7 @@ const src = (n) => `/img/catalogo/p${String(n).padStart(2, '0')}.webp`;
 
 // Anteprima: un libro 3D che si apre e si sfoglia con lo scroll
 export default function Catalogue() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const root = useRef(null);
   const btn = useRef(null);
 
@@ -36,6 +37,9 @@ export default function Catalogue() {
 
       gsap.from('.cta__title .line__inner', { yPercent: 110, stagger: 0.1, duration: 1, ease: 'power4.out', scrollTrigger: { trigger: '.cta__title', start: 'top 85%' } });
 
+      const mm = gsap.matchMedia();
+      // Desktop: si sfoglia con lo scroll
+      mm.add('(min-width: 900px)', () => {
       const tl = gsap.timeline({
         defaults: { ease: 'power2.inOut' },
         onUpdate: setZ,
@@ -57,6 +61,11 @@ export default function Catalogue() {
       });
       tl.to('.book', { xPercent: 25, rotationX: 10, rotationZ: 4, duration: 0.8 }, '>-0.3')
         .to({}, { duration: 0.3 });
+      });
+      // Mobile: libro chiuso, si sfoglia solo se vuoi (pulsante)
+      mm.add('(max-width: 899px)', () => {
+        gsap.set('.book', { xPercent: -25, rotationX: 10, rotationZ: -4 });
+      });
 
       // Bottone magnetico
       const el = btn.current;
@@ -82,6 +91,32 @@ export default function Catalogue() {
     { scope: root, dependencies: [t], revertOnUpdate: true }
   );
 
+  // Mobile: ogni tocco gira una pagina (avanti/indietro)
+  const [page, setPage] = useState(0);
+  const flip = (d) => {
+    const leaves = gsap.utils.toArray('.book__leaf', root.current);
+    const n = leaves.length;
+    const next = Math.max(0, Math.min(n, page + d));
+    if (next === page) return;
+    const i = d > 0 ? page : next; // foglio che si muove
+    const leaf = leaves[i];
+    leaf.style.zIndex = 50;
+    gsap.to(leaf, {
+      rotationY: d > 0 ? -180 : 0,
+      duration: 0.9,
+      ease: 'power3.inOut',
+      onComplete: () => (leaf.style.zIndex = d > 0 ? i + 1 : n - i),
+    });
+    gsap.to('.book', {
+      xPercent: next === 0 ? -25 : next === n ? 25 : 0,
+      rotationX: next === 0 ? 10 : 4,
+      rotationZ: next === 0 ? -4 : 0,
+      duration: 0.9,
+      ease: 'power3.inOut',
+    });
+    setPage(next);
+  };
+
   return (
     <section className="cta" ref={root}>
       <div className="cta__panel">
@@ -99,7 +134,7 @@ export default function Catalogue() {
             <p className="cta__text">{t.cta.text}</p>
             <a ref={btn} className="btn btn--big btn--paper" href={CATALOGUE_URL} download data-cursor="hover">
               <span className="btn__label">{t.cta.button}</span>
-              <span className="btn__icon" aria-hidden="true">↓</span>
+              <span className="btn__icon" aria-hidden="true"><Arrow dir="down" /></span>
             </a>
           </div>
         </div>
@@ -118,6 +153,15 @@ export default function Catalogue() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="book__mobile">
+            <button className="book__round" onClick={() => flip(-1)} disabled={page === 0} aria-label={lang === 'en' ? 'Previous page' : 'Pagina precedente'}>
+              <Arrow dir="left" />
+            </button>
+            <button className="book__flip" onClick={() => flip(page === LEAVES.length ? -LEAVES.length : 1)}>
+              {page === LEAVES.length ? (lang === 'en' ? 'Close' : 'Richiudi') : lang === 'en' ? 'Flip through' : 'Sfoglia il catalogo'}
+              <Arrow dir="right" />
+            </button>
           </div>
         </div>
       </div>

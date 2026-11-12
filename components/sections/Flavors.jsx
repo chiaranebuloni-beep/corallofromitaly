@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
+import Arrow from '../Arrow';
 import { Chars } from '../Split';
 
 const FLAVORS = [
@@ -78,7 +79,7 @@ export default function Flavors() {
           </h2>
           <p className="flavors__title">{t.flavors.title}</p>
           <p className="flavors__hint" aria-hidden="true">
-            <span>→</span>
+            <span><Arrow dir="right" /></span>
           </p>
         </div>
 

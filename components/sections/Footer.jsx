@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
+import Arrow from '../Arrow';
 import { CATALOGUE_URL, EMAIL } from '@/lib/i18n';
 import { LOGO_NEGATIVE } from '@/lib/logoNegative';
 
@@ -50,10 +51,10 @@ export default function Footer() {
           </div>
           <div>
             <a href={`mailto:${EMAIL}`} data-cursor="hover">{EMAIL}</a>
-            <a href={CATALOGUE_URL} download data-cursor="hover">{t.catalogue} ↓</a>
+            <a href={CATALOGUE_URL} download data-cursor="hover">{t.catalogue} <Arrow dir="down" /></a>
           </div>
           <div className="footer__right">
-            <a href="#top" data-cursor="hover">{t.footer.top} ↑</a>
+            <a href="#top" data-cursor="hover">{t.footer.top} <Arrow dir="up" /></a>
             <p className="footer__small">© {new Date().getFullYear()} Corallo from Italy. {t.footer.rights}</p>
           </div>
         </div>

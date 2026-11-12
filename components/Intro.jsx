@@ -98,9 +98,13 @@ export default function Intro({ onDone, finalColor = 'var(--paper)' }) {
 
       <div className="intro__bottom">
         <p className="intro__brand">
-          {'CORALLO FROM ITALY'.split('').map((ch, i) => (
-            <span key={i} className="line-c">
-              <span className="c">{ch === ' ' ? ' ' : ch}</span>
+          {'CORALLO FROM ITALY'.split(' ').map((word, w) => (
+            <span key={w} className="intro__wordgrp">
+              {word.split('').map((ch, j) => (
+                <span key={j} className="line-c">
+                  <span className="c">{ch}</span>
+                </span>
+              ))}
             </span>
           ))}
         </p>

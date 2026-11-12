@@ -6,12 +6,13 @@ import { Line } from '../Split';
 import Luigi from '../Luigi';
 import { luigiIdle } from '@/lib/luigiAnim';
 import Truffle from '../Truffle';
+import Arrow from '../Arrow';
 
 const CARDS = ['/img/post-luigi-01.webp', '/img/post-luigi-02.webp', 'card-03'];
 const TILT = [-4, 5, -7, 3];
 
 export default function LuigiSection() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const root = useRef(null);
   const svg = useRef(null);
 
@@ -43,6 +44,8 @@ export default function LuigiSection() {
       gsap.set(cards, { rotation: (i) => TILT[i], y: (i) => i * 10, scale: (i) => 1 - i * 0.04, zIndex: (i) => cards.length - i });
       gsap.set(lessons, { yPercent: (i) => (i ? 100 : 0), opacity: (i) => (i ? 0 : 1) });
 
+      const mm = gsap.matchMedia();
+      mm.add('(min-width: 900px)', () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.deck',
@@ -69,9 +72,35 @@ export default function LuigiSection() {
           }, '<');
       });
       tl.to({}, { duration: 0.4 });
+      });
     },
     { scope: root, dependencies: [t], revertOnUpdate: true }
   );
+
+  // Mobile: la freccia lancia via la carta e mostra la successiva
+  const idx = useRef(0);
+  const nextCard = () => {
+    const q = (sel) => gsap.utils.toArray(sel, root.current);
+    const cards = q('.deck__card');
+    const lessons = q('.deck__lesson');
+    const count = root.current.querySelector('.deck__count b');
+    const n = cards.length;
+    const i = idx.current;
+    if (i < n - 1) {
+      gsap.to(cards[i], { x: window.innerWidth * 1.1, rotation: 28, duration: 0.55, ease: 'power2.in' });
+      gsap.to(cards.slice(i + 1), { y: (j) => j * 10, scale: (j) => 1 - j * 0.04, rotation: (j) => (j === 0 ? 0 : TILT[i + 1 + j]), duration: 0.5, delay: 0.2, ease: 'power2.out' });
+      gsap.to(lessons[i], { yPercent: -100, opacity: 0, duration: 0.35 });
+      gsap.fromTo(lessons[i + 1], { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, delay: 0.15 });
+      idx.current = i + 1;
+    } else {
+      // ricomincia: il mazzo si ricompone
+      gsap.to(cards, { x: 0, y: (j) => j * 10, scale: (j) => 1 - j * 0.04, rotation: (j) => TILT[j], duration: 0.6, stagger: { each: 0.08, from: 'end' }, ease: 'back.out(1.4)' });
+      gsap.to(lessons[i], { yPercent: -100, opacity: 0, duration: 0.35 });
+      gsap.fromTo(lessons[0], { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, delay: 0.15 });
+      idx.current = 0;
+    }
+    count.textContent = String(idx.current + 1).padStart(2, '0');
+  };
 
   return (
     <section className="luigi" id="luigi" ref={root}>
@@ -111,6 +140,9 @@ export default function LuigiSection() {
           </div>
           <p className="deck__hint">{t.luigi.deckHint}</p>
         </div>
+        <button className="deck__next" onClick={nextCard} aria-label={lang === 'en' ? 'Next card' : 'Carta successiva'}>
+          <Arrow dir="right" />
+        </button>
         <div className="deck__stack">
           {CARDS.map((src, i) =>
             src === 'card-03' ? (

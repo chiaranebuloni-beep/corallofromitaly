@@ -2,6 +2,7 @@
 import { useRef, useState } from 'react';
 import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
+import Arrow from '../Arrow';
 import { EMAIL, PHONE, PHONE_HREF } from '@/lib/i18n';
 import { Line } from '../Split';
 import Luigi from '../Luigi';
@@ -14,7 +15,7 @@ function Blank({ value, onChange, placeholder, type = 'text', required, autoComp
     <span className="blank">
       <input
         className="blank__input"
-        style={{ width: `${len * 0.52 + 0.5}em` }}
+        style={{ width: `${len * 0.64 + 1}em` }}
         type={type}
         name={name}
         required={required}
@@ -53,7 +54,7 @@ export default function Contact() {
     e.preventDefault();
     const topic = m.topics[data.topic];
     const body = [
-      `${m.hello} ${data.name}${data.company ? `, ${m.work} ${data.company}` : ''}, ${m.topicIntro} ${topic}.`,
+      `${m.hello} ${data.name} ${m.topicIntro} ${topic}.`,
       '',
       data.message,
       '',
@@ -101,8 +102,8 @@ export default function Contact() {
       <form className="mad" onSubmit={submit}>
         <p className="mad__line">
           {m.hello}{' '}
-          <Blank name="name" required autoComplete="name" placeholder={m.name} value={data.name} onChange={set('name')} />, {m.work}{' '}
-          <Blank name="company" autoComplete="organization" placeholder={m.company} value={data.company} onChange={set('company')} /> {m.topicIntro}…
+<Blank name="name" required autoComplete="name" placeholder={m.name} value={data.name} onChange={set('name')} />{' '}
+          {m.topicIntro}…
         </p>
 
         <div className="mad__chips" role="radiogroup" aria-label={m.topicIntro}>
@@ -135,7 +136,7 @@ export default function Contact() {
         <div className="mad__send">
           <button type="submit" className="send" data-cursor="hover">
             <span className="send__label">{sent ? '✓' : m.send}</span>
-            <span className="send__arrow" aria-hidden="true">↗</span>
+            <span className="send__arrow" aria-hidden="true"><Arrow /></span>
           </button>
           <div className="mad__luigi" aria-hidden="true">
             <Luigi ref={luigi} variant="sticker" />
@@ -163,12 +164,12 @@ export default function Contact() {
         <a className="crow" href={`mailto:${EMAIL}`} data-cursor="hover">
           <span className="crow__k">{m.cards.mail}</span>
           <span className="crow__v">{EMAIL}</span>
-          <span className="crow__icon" aria-hidden="true">↗</span>
+          <span className="crow__icon" aria-hidden="true"><Arrow /></span>
         </a>
         <a className="crow" href={PHONE_HREF} data-cursor="hover">
           <span className="crow__k">{m.cards.phone}</span>
           <span className="crow__v">{PHONE}</span>
-          <span className="crow__icon" aria-hidden="true">↗</span>
+          <span className="crow__icon" aria-hidden="true"><Arrow /></span>
         </a>
       </div>
     </section>

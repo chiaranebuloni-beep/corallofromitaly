@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
+import Arrow from '../Arrow';
 import Luigi, { PIVOTS } from '../Luigi';
 import { luigiAssemble, luigiIdle } from '@/lib/luigiAnim';
 
@@ -123,7 +124,7 @@ export default function HeroB({ ready }) {
         <p className="heroB__kicker">{t.hero.kicker}</p>
         <p className="heroB__tagline">Taste of Tradition</p>
         <p className="heroB__scroll">
-          {t.hero.scroll} <span aria-hidden="true">↓</span>
+          {t.hero.scroll} <span aria-hidden="true"><Arrow dir="down" /></span>
         </p>
       </div>
     </section>
