@@ -30,12 +30,14 @@ const Luigi = forwardRef(function Luigi({ variant = 'mascot', className, title =
     sticker: '190 196 212 276',
   }[variant];
 
-  const groups = LOGO_GROUPS.filter((g) => {
+  let groups = LOGO_GROUPS.filter((g) => {
     if (variant === 'mascot' || variant === 'sticker') return !TEXT.includes(g.id);
     if (variant === 'juggler') return !TEXT.includes(g.id) && !['leaf', 'flower', 'stem'].includes(g.id);
     if (variant === 'lockup') return g.id !== 'tagline';
     return true;
   });
+  // senza foglia e fiore, gli archi vanno dietro le mani (altrimenti le punte spuntano sopra)
+  if (variant === 'juggler') groups = [...groups.filter((g) => g.id === 'arcs'), ...groups.filter((g) => g.id !== 'arcs')];
 
   return (
     <svg
