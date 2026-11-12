@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
 import Arrow from '../Arrow';
-import { EMAIL, PHONE, PHONE_HREF } from '@/lib/i18n';
+import { EMAIL, PHONE, PHONE_HREF, INSTAGRAM } from '@/lib/i18n';
 import { Line } from '../Split';
 import Luigi from '../Luigi';
 import Truffle from '../Truffle';
@@ -169,6 +169,11 @@ export default function Contact() {
         <a className="crow" href={PHONE_HREF} data-cursor="hover">
           <span className="crow__k">{m.cards.phone}</span>
           <span className="crow__v">{PHONE}</span>
+          <span className="crow__icon" aria-hidden="true"><Arrow /></span>
+        </a>
+        <a className="crow" href={INSTAGRAM} target="_blank" rel="noopener noreferrer" data-cursor="hover">
+          <span className="crow__k">{m.cards.ig}</span>
+          <span className="crow__v">@corallofromitaly</span>
           <span className="crow__icon" aria-hidden="true"><Arrow /></span>
         </a>
       </div>
