@@ -28,3 +28,9 @@ ink #1d1d1b · rosso #e63329 · verde #9ac43c · rosa #f6b1af
 - Footer con il logo negativo ufficiale (`lib/logoNegative.js`, pagina 2 del brand sheet).
 - Catalogo: libro 3D sfogliabile con le pagine in `public/img/catalogo`.
 - Le foto in `foto truffle/` (alta risoluzione, fondo bianco) non sono ancora usate.
+
+## Pubblicazione
+- GitHub: chiaranebuloni-beep/corallofromitaly (branch main). Vercel: progetto `corallofromitaly` nel team `meraviglias-projects`, deploy con `npx vercel deploy --prod --yes --scope meraviglias-projects`.
+- Quando si collega il dominio vero, impostare su Vercel `NEXT_PUBLIC_SITE_URL=https://www.corallofromitaly.com` (usato da anteprima social, robots e sitemap).
+- Instagram: https://www.instagram.com/corallofromitaly/ (footer + contatti).
+- Test Safari/iPhone: Playwright WebKit (non c'è Xcode sul Mac per il simulatore).
