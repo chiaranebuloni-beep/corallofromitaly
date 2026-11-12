@@ -2534,3 +2534,29 @@ html {
     width: 42px;
   }
 }
+
+/* hero mobile: scritte in basso su una riga, allineate */
+@media (max-width: 899px) {
+  .heroB__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .heroB__tagline {
+    flex: 0 0 100%;
+    order: -1;
+  }
+  .heroB__kicker {
+    white-space: nowrap;
+  }
+  .heroB__scroll {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
