@@ -2513,3 +2513,7 @@ html {
     font-size: 26px;
   }
 }
+
+.crow__v {
+  text-transform: uppercase;
+}
