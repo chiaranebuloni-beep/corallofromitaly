@@ -21,7 +21,7 @@ export default function Flavors() {
       const mm = gsap.matchMedia();
 
       // Desktop: scorrimento orizzontale con pin
-      mm.add('(min-width: 900px)', () => {
+      mm.add('all', () => {
         const track = root.current.querySelector('.flavors__track');
         const dist = () => track.scrollWidth - window.innerWidth;
         const h = gsap.to(track, {
@@ -61,13 +61,6 @@ export default function Flavors() {
         });
       });
 
-      // Mobile: pannelli verticali con piccole animazioni
-      mm.add('(max-width: 899px)', () => {
-        gsap.utils.toArray('.flavor').forEach((panel) => {
-          gsap.fromTo(panel.querySelector('.flavor__truffle'), { rotation: -120 }, { rotation: 120, ease: 'none', scrollTrigger: { trigger: panel, start: 'top bottom', end: 'bottom top', scrub: true } });
-          gsap.from(panel.querySelectorAll('.flavor__name .c'), { yPercent: 100, stagger: 0.03, duration: 0.7, ease: 'back.out(2)', scrollTrigger: { trigger: panel, start: 'top 75%' } });
-        });
-      });
     },
     { scope: root, dependencies: [t], revertOnUpdate: true }
   );

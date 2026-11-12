@@ -926,7 +926,7 @@ blockquote {
   left: 0;
   right: 0;
   top: 50%;
-  translate: 0 -55%;
+  margin-top: -0.55em;
   text-align: center;
   white-space: nowrap;
   font-weight: 900;
@@ -937,11 +937,12 @@ blockquote {
   padding: 0.04em 0;
 }
 .flavor__truffle {
+  --tw: clamp(200px, 22vw, 360px);
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(200px, 22vw, 360px);
-  translate: -50% -50%;
+  width: var(--tw);
+  margin: calc(var(--tw) / -2) 0 0 calc(var(--tw) / -2);
   z-index: 2;
   filter: drop-shadow(0 40px 40px rgba(0, 0, 0, 0.3));
 }
@@ -1519,72 +1520,6 @@ blockquote {
     height: 110vw;
   }
 
-  .flavors__track {
-    flex-direction: column;
-    height: auto;
-    width: 100%;
-  }
-  .flavors__intro,
-  .flavor {
-    flex-basis: auto;
-    width: 100%;
-    min-height: 100svh;
-  }
-  .flavors__intro {
-    min-height: 70svh;
-  }
-  .flavors__hint {
-    display: none;
-  }
-  .flavor {
-    display: flex;
-    flex-direction: column;
-    padding: calc(var(--header-h) + 50px) var(--gutter) 40px;
-    min-height: auto;
-  }
-  .flavor__index {
-    top: 24px;
-  }
-  .flavor__name {
-    position: relative;
-    translate: none;
-    top: auto;
-    font-size: clamp(40px, 12.4vw, 110px);
-    order: 1;
-  }
-  .flavor__truffle {
-    position: relative;
-    left: auto;
-    top: auto;
-    translate: none;
-    width: 52vw;
-    margin: -6vw auto 0;
-    order: 2;
-  }
-  .flavor__tins,
-  .flavor__box {
-    position: relative;
-    inset: auto;
-    width: 72vw;
-    order: 3;
-  }
-  .flavor__tins {
-    align-self: flex-end;
-    rotate: 3deg;
-    margin-top: 20px;
-  }
-  .flavor__box {
-    rotate: -4deg;
-    margin-top: -30px;
-  }
-  .flavor__info {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    order: 4;
-    margin-top: 30px;
-  }
-
   .luigi__title {
     font-size: 9.2vw;
   }
@@ -1765,13 +1700,13 @@ blockquote {
 }
 @media (max-width: 899px) {
   .heroB__word {
-    font-size: 20.5vw;
-    top: calc(var(--header-h) + 6vh);
-    translate: 0 0;
+    font-size: 21vw;
+    top: 50%;
+    translate: 0 -175%;
   }
   .heroB__luigi {
-    width: min(52vh, 84vw);
-    margin-top: 14vh;
+    width: min(46vh, 70vw);
+    margin-top: 8vh;
   }
   .heroB__bottom {
     grid-template-columns: 1fr 1fr;
@@ -2304,4 +2239,80 @@ a.crow:hover .crow__icon {
   background-size: 900px;
   background-repeat: repeat;
   background-blend-mode: multiply;
+}
+
+@media (max-width: 899px) {
+  .quote__bloom {
+    width: 78vw;
+  }
+  .quote__seed {
+    width: 52px;
+  }
+}
+
+/* gusti su mobile: stesso scorrimento orizzontale del desktop, pannelli verticali */
+@media (max-width: 899px) {
+  .flavors__intro {
+    flex-basis: 100vw;
+    justify-content: center;
+  }
+  .flavors__big {
+    font-size: 19vw;
+    margin-top: 28px;
+  }
+  .flavors__hint {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+    bottom: calc(var(--gutter) + 20px);
+  }
+  .flavor__name {
+    font-size: 15vw;
+    top: 37%;
+  }
+  .flavor__truffle {
+    --tw: 44vw;
+    top: 52%;
+  }
+  .flavor__tins {
+    width: 40vw;
+    right: 4%;
+    top: calc(var(--header-h) + 40px);
+    padding: 6px;
+    border-radius: 14px;
+  }
+  .flavor__box {
+    width: 40vw;
+    left: 4%;
+    bottom: auto;
+    top: 60%;
+    padding: 6px;
+    border-radius: 14px;
+  }
+  .flavor__info {
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto;
+    bottom: 20px;
+  }
+  .flavor__desc {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .flavor__tag {
+    margin-bottom: 8px;
+  }
+  .flavor__formats {
+    margin-top: 6px;
+    font-size: 11px;
+  }
+}
+
+/* niente scorrimento orizzontale della pagina (es. libro 3D a fine sfoglio) */
+html {
+  overflow-x: clip;
+}
+.cta {
+  overflow: hidden;
 }
