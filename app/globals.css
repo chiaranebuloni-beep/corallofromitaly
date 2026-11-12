@@ -925,7 +925,7 @@ blockquote {
   position: absolute;
   left: 0;
   right: 0;
-  top: 44%;
+  top: 46%;
   margin-top: -0.55em;
   text-align: center;
   white-space: nowrap;
@@ -958,8 +958,8 @@ blockquote {
   border-radius: 12px;
 }
 .flavor__tins {
-  width: clamp(200px, 19vw, 320px);
-  right: 5%;
+  width: clamp(120px, 9vw, 170px);
+  right: 9%;
   top: calc(var(--header-h) + 2%);
 }
 .flavor__box {
@@ -2277,9 +2277,9 @@ a.crow:hover .crow__icon {
     top: 45%;
   }
   .flavor__tins {
-    width: 56vw;
-    right: 4%;
-    top: 55%;
+    width: 28vw;
+    right: 6%;
+    top: 40%;
     padding: 5px;
     border-radius: 14px;
   }

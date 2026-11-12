@@ -6,10 +6,10 @@ import Arrow from '../Arrow';
 import { Chars } from '../Split';
 
 const FLAVORS = [
-  { key: 'cacao', truffle: '/img/truffle-cacao.webp', tins: '/img/tins-cacao.webp', box: '/img/box-cacao.webp' },
-  { key: 'pistacchio', truffle: '/img/truffle-pistacchio.webp', tins: '/img/tins-pistacchio.webp', box: '/img/box-pistacchio.webp' },
-  { key: 'nocciola', truffle: '/img/truffle-nocciola.webp', tins: '/img/tins-nocciola.webp', box: '/img/box-nocciola.webp' },
-  { key: 'caramello', truffle: '/img/truffle-cacao.webp', tins: '/img/tins-caramello.webp', box: '/img/box-caramello.webp' },
+  { key: 'cacao', truffle: '/img/truffle-cacao.webp', tins: '/img/tin-cacao.webp', box: '/img/box-cacao.webp' },
+  { key: 'pistacchio', truffle: '/img/truffle-pistacchio.webp', tins: '/img/tin-pistacchio.webp', box: '/img/box-pistacchio.webp' },
+  { key: 'nocciola', truffle: '/img/truffle-nocciola.webp', tins: '/img/tin-nocciola.webp', box: '/img/box-nocciola.webp' },
+  { key: 'caramello', truffle: '/img/truffle-cacao.webp', tins: '/img/tin-caramello.webp', box: '/img/box-caramello.webp' },
 ];
 
 export default function Flavors() {
