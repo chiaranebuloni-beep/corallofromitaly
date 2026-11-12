@@ -163,7 +163,10 @@ export default function Contact() {
         </div>
         <a className="crow" href={`mailto:${EMAIL}`} data-cursor="hover">
           <span className="crow__k">{m.cards.mail}</span>
-          <span className="crow__v">{EMAIL}</span>
+          <span className="crow__v">
+            {EMAIL.split('@')[0]}
+            <wbr />@{EMAIL.split('@')[1]}
+          </span>
           <span className="crow__icon" aria-hidden="true"><Arrow /></span>
         </a>
         <a className="crow" href={PHONE_HREF} data-cursor="hover">

@@ -2517,3 +2517,20 @@ html {
 .crow__v {
   text-transform: uppercase;
 }
+
+/* contatti: niente parole spezzate a metà */
+.crow__v {
+  word-break: normal;
+  overflow-wrap: normal;
+}
+@media (max-width: 899px) {
+  .crow__v {
+    font-size: 19px;
+  }
+  .crow {
+    gap: 12px;
+  }
+  .crow__icon {
+    width: 42px;
+  }
+}
