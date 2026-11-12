@@ -47,7 +47,7 @@ export const viewport = { themeColor: '#e63329' };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={`${forno.variable} ${fornoVar.variable} ${archivo.variable}`}>
+    <html lang="it" className={`has-heroB ${forno.variable} ${fornoVar.variable} ${archivo.variable}`}>
       <body>{children}</body>
     </html>
   );

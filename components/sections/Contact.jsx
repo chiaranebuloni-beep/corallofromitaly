@@ -126,6 +126,7 @@ export default function Contact() {
           <Blank name="email" type="email" required autoComplete="email" placeholder={m.email} value={data.email} onChange={set('email')} />.
         </p>
 
+        <div className="mad__bottom">
         <label className="mad__note">
           <span>{m.more}</span>
           <textarea rows={3} placeholder={m.morePh} value={data.message} onChange={set('message')} />
@@ -149,6 +150,7 @@ export default function Contact() {
           <p className="mad__status" aria-live="polite">
             {sent ? m.sent : t.contact.form.note}
           </p>
+        </div>
         </div>
       </form>
 
