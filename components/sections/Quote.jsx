@@ -46,14 +46,14 @@ export default function Quote() {
         // Seme che cade e fiore che sboccia: gira da solo in loop
         const loop = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 0.25 });
         loop
-          .set('.quote__seed', { y: () => -root.current.querySelector('.quote__stage').offsetHeight * 0.9, rotation: -140, scaleX: 1, scaleY: 1, transformOrigin: '50% 100%' })
+          .set('.quote__seed', { y: () => -root.current.querySelector('.quote__stage').offsetHeight * 0.9, rotation: 0, x: 0, scaleX: 1, scaleY: 1, transformOrigin: '50% 100%' })
           .set('.quote__shadow', { scale: 0.15, opacity: 0 })
           .set('.quote__dust', { x: 0, y: 0, opacity: 0, scale: 1 })
           .set('.quote__bloom [data-p="stem"]', { strokeDashoffset: 1 })
           .set('.quote__bloom [data-p="flower"]', { scale: 0, rotation: -120, svgOrigin: '322 268' })
           .set('.quote__bloom [data-p="leaf"]', { scale: 0, rotation: 120, svgOrigin: '262 268' })
           // caduta con gravità, l'ombra cresce mentre si avvicina a terra
-          .to('.quote__seed', { y: 0, rotation: 0, duration: 0.55, ease: 'power3.in' })
+          .to('.quote__seed', { y: 0, duration: 0.55, ease: 'power3.in' })
           .to('.quote__shadow', { scale: 1, opacity: 0.22, duration: 0.55, ease: 'power3.in' }, '<')
           // impatto: si schiaccia e solleva un po' di polvere
           .to('.quote__seed', { scaleY: 0.72, scaleX: 1.22, duration: 0.07, ease: 'power1.out' })
