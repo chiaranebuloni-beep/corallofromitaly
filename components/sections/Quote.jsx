@@ -78,16 +78,24 @@ export default function Quote() {
           .to('.quote__bloom [data-p="stem"]', { strokeDashoffset: 0, duration: 0.45, ease: 'power2.out' }, '>-0.1')
           .to('.quote__bloom [data-p="flower"]', { scale: 1, rotation: 0, svgOrigin: '322 268', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '>-0.15')
           .to('.quote__bloom [data-p="leaf"]', { scale: 1, rotation: 0, svgOrigin: '262 268', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '<0.06')
-          .add(() => text.play(), '<0.2')
           // resta sbocciato, poi si richiude e ricomincia
-          .to('.quote__bloom [data-p="flower"], .quote__bloom [data-p="leaf"]', { scale: 0, duration: 0.35, ease: 'back.in(1.6)' }, '+=1.6')
+          .to('.quote__bloom [data-p="flower"], .quote__bloom [data-p="leaf"]', { scale: 0, duration: 0.35, ease: 'back.in(1.6)' }, '+=2.6')
           .to('.quote__bloom [data-p="stem"]', { strokeDashoffset: 1, duration: 0.3, ease: 'power2.in' }, '<0.15');
 
+        loop.timeScale(1.6);
+        // parte appena la sezione entra nello schermo e non si ferma più
         ScrollTrigger.create({
           trigger: root.current,
-          start: 'top 70%',
-          end: 'bottom 10%',
-          onToggle: (self) => (self.isActive ? loop.play() : loop.pause()),
+          start: 'top bottom',
+          once: true,
+          onEnter: () => loop.play(),
+        });
+        // la frase entra subito, da sola
+        ScrollTrigger.create({
+          trigger: '.quote__body',
+          start: 'top 95%',
+          once: true,
+          onEnter: () => text.timeScale(1.4).play(),
         });
       });
     },
