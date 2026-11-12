@@ -27,8 +27,7 @@ export default function Gallery() {
     () => {
       if (reducedMotion()) return;
       const st = { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: true };
-      gsap.fromTo('.gallery__row--a', { xPercent: 5 }, { xPercent: -35, ease: 'none', scrollTrigger: st });
-      gsap.fromTo('.gallery__row--b', { xPercent: -35 }, { xPercent: 5, ease: 'none', scrollTrigger: st });
+      gsap.fromTo('.gallery__row--a', { xPercent: 0 }, { xPercent: -40, ease: 'none', scrollTrigger: st });
       gsap.from('.gallery__title .line__inner', {
         yPercent: 110,
         stagger: 0.1,
@@ -62,8 +61,7 @@ export default function Gallery() {
         <p className="gallery__text">{t.gallery.text}</p>
       </div>
       <div className="gallery__rows">
-        <Row items={ROW1} className="gallery__row--a" />
-        <Row items={ROW2} className="gallery__row--b" />
+        <Row items={[...ROW1, ...ROW2.slice(0, 3)]} className="gallery__row--a" />
       </div>
     </section>
   );

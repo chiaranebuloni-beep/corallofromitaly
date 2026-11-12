@@ -33,7 +33,6 @@ export default function HeroB({ ready }) {
         duration: 1,
         ease: 'back.out(1.7)',
       })
-        .to('.heroB__letter', { '--waff': 2, duration: 0.35, stagger: 0.05, yoyo: true, repeat: 1, ease: 'power2.inOut' }, 0.6)
         .from('.heroB__sticker', { scale: 0, rotation: -40, duration: 1.1, ease: 'elastic.out(1, 0.55)' }, 0.3)
         .add(luigiAssemble(s), 0.4)
         .from('.heroB__chip', { scale: 0, rotation: (i) => (i ? 30 : -30), duration: 0.7, stagger: 0.1, ease: 'back.out(2.5)' }, 1)

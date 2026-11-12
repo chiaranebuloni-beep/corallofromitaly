@@ -4,8 +4,20 @@ import './globals.css';
 
 // Forno (versione Trial: sostituire con i file su licenza prima della pubblicazione)
 const forno = localFont({
-  src: '../public/fonts/forno-var.woff2',
+  src: [
+    { path: '../public/fonts/forno-regular.woff2', weight: '400' },
+    { path: '../public/fonts/forno-medium.woff2', weight: '500' },
+    { path: '../public/fonts/forno-bold.woff2', weight: '700' },
+    { path: '../public/fonts/forno-black.woff2', weight: '900' },
+  ],
   variable: '--font-forno',
+  display: 'swap',
+});
+
+// Versione variabile solo per l'effetto "waffle" sui numeri (Safari disegna male alcune lettere)
+const fornoVar = localFont({
+  src: '../public/fonts/forno-var.woff2',
+  variable: '--font-forno-var',
   weight: '0 900',
   display: 'swap',
 });
@@ -35,7 +47,7 @@ export const viewport = { themeColor: '#e63329' };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={`${forno.variable} ${archivo.variable}`}>
+    <html lang="it" className={`${forno.variable} ${fornoVar.variable} ${archivo.variable}`}>
       <body>{children}</body>
     </html>
   );

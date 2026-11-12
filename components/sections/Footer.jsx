@@ -28,10 +28,13 @@ export default function Footer() {
     () => {
       if (reducedMotion()) return;
       const tl = gsap.timeline({ scrollTrigger: { trigger: root.current, start: 'top 70%' } });
-      tl.from('.footer__logo [data-part="mascot"]', { scale: 0, rotation: -30, transformOrigin: '50% 100%', duration: 1.1, ease: 'elastic.out(1, 0.5)' })
+      tl.from('.footer__logo [data-part="mascot"]', { scale: 0, rotation: -12, transformOrigin: '50% 100%', duration: 1.1, ease: 'back.out(1.8)' })
         .from('.footer__logo [data-letter]', { yPercent: 120, opacity: 0, stagger: 0.05, duration: 0.6, ease: 'back.out(2)' }, '-=0.7')
         .from('.footer__logo [data-part="from"], .footer__logo [data-part="italy"], .footer__logo [data-part="tagline"]', { opacity: 0, y: 8, duration: 0.5, stagger: 0.1 }, '-=0.4');
-      gsap.to('.footer__logo [data-part="mascot"]', { rotation: 3, transformOrigin: '50% 100%', duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2 });
+      // leggero dondolio solo dopo che Luigi è comparso
+      tl.add(() => {
+        gsap.fromTo('.footer__logo [data-part="mascot"]', { rotation: -1.5 }, { rotation: 1.5, transformOrigin: '50% 100%', duration: 1.6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      });
     },
     { scope: root }
   );

@@ -4,46 +4,87 @@ import { gsap, useGSAP, reducedMotion } from '@/lib/gsap';
 import { useLang } from '@/lib/lang';
 import { EMAIL, PHONE, PHONE_HREF } from '@/lib/i18n';
 import { Line } from '../Split';
+import Luigi from '../Luigi';
+import Truffle from '../Truffle';
 
-// Modulo senza server: compone l'email nel programma di posta dell'utente.
+// Campo dentro la frase: si allarga mentre scrivi
+function Blank({ value, onChange, placeholder, type = 'text', required, autoComplete, name }) {
+  const len = Math.max((value || placeholder).length, 4);
+  return (
+    <span className="blank">
+      <input
+        className="blank__input"
+        style={{ width: `${len * 0.52 + 0.5}em` }}
+        type={type}
+        name={name}
+        required={required}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        aria-label={placeholder}
+      />
+    </span>
+  );
+}
+
+// Modulo "frase da completare": compone l'email nel programma di posta dell'utente.
 export default function Contact() {
   const { t } = useLang();
-  const f = t.contact.form;
+  const m = t.contact.mad;
   const root = useRef(null);
-  const [data, setData] = useState({ name: '', email: '', company: '', message: '' });
+  const luigi = useRef(null);
+  const [data, setData] = useState({ name: '', company: '', topic: 0, email: '', message: '' });
+  const [sent, setSent] = useState(false);
+  const set = (k) => (e) => setData((d) => ({ ...d, [k]: e.target.value }));
 
   useGSAP(
     () => {
       if (reducedMotion()) return;
       gsap.from('.contact__title .line__inner', { yPercent: 110, stagger: 0.1, duration: 1, ease: 'power4.out', scrollTrigger: { trigger: '.contact__title', start: 'top 85%' } });
-      gsap.from('.contact__info > *, .field, .contact__form .btn', {
-        y: 40,
-        opacity: 0,
-        stagger: 0.06,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.contact__grid', start: 'top 80%' },
-      });
+      gsap.from('.mad > *', { y: 40, opacity: 0, stagger: 0.06, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.mad', start: 'top 80%' } });
+      gsap.from('.contact-card', { y: 80, rotation: (i) => (i - 1) * 14, opacity: 0, stagger: 0.1, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.contact__cards', start: 'top 90%' } });
+      gsap.to('.mad__luigi', { y: -8, rotation: 4, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
     },
     { scope: root, dependencies: [t], revertOnUpdate: true }
   );
 
-  const set = (k) => (e) => setData((d) => ({ ...d, [k]: e.target.value }));
-
   const submit = (e) => {
     e.preventDefault();
+    const topic = m.topics[data.topic];
     const body = [
+      `${m.hello} ${data.name}${data.company ? `, ${m.work} ${data.company}` : ''}, ${m.topicIntro} ${topic}.`,
+      '',
       data.message,
       '',
-      '—',
-      data.name,
-      data.company,
-      data.email,
-    ]
-      .filter((l) => l !== undefined && l !== null)
-      .join('\n');
-    const subject = `${f.subject}${data.name ? ' — ' + data.name : ''}`;
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      `${m.reply} ${data.email}`,
+    ].join('\n');
+    const subject = `${t.contact.form.subject} — ${topic} — ${data.name}`;
+    setSent(true);
+
+    // festa: Luigi salta e piovono tartufi
+    const go = () => (window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    if (reducedMotion()) return go();
+    const q = root.current;
+    gsap.timeline({ onComplete: go })
+      .to('.mad__luigi', { y: -60, rotation: -10, duration: 0.25, ease: 'power2.out' })
+      .to('.mad__luigi', { y: 0, rotation: 0, duration: 0.6, ease: 'bounce.out' })
+      .fromTo(
+        q.querySelectorAll('.confetti'),
+        { x: 0, y: 0, scale: 0, opacity: 1 },
+        {
+          x: () => gsap.utils.random(-320, 320),
+          y: () => gsap.utils.random(-260, -60),
+          scale: () => gsap.utils.random(0.6, 1.2),
+          rotation: () => gsap.utils.random(-360, 360),
+          duration: 0.7,
+          ease: 'power3.out',
+          stagger: 0.02,
+        },
+        0
+      )
+      .to(q.querySelectorAll('.confetti'), { y: '+=300', opacity: 0, duration: 0.8, ease: 'power2.in', stagger: 0.02 }, 0.7);
+    setTimeout(() => setSent(false), 4000);
   };
 
   return (
@@ -55,45 +96,75 @@ export default function Contact() {
         <Line>{t.contact.title[0]}</Line>
         <Line className="is-red">{t.contact.title[1]}</Line>
       </h2>
+      <p className="contact__text">{t.contact.text}</p>
 
-      <div className="contact__grid">
-        <div className="contact__info">
-          <p className="contact__text">{t.contact.text}</p>
-          <div className="contact__card">
-            <p className="contact__small">{t.contact.person}</p>
-            <p className="contact__name">Giulio Stracquadanio</p>
-          </div>
-          <a className="contact__big-link" href={`mailto:${EMAIL}`} data-cursor="hover">
-            {EMAIL}
-          </a>
-          <a className="contact__big-link" href={PHONE_HREF} data-cursor="hover">
-            {PHONE}
-          </a>
+      <form className="mad" onSubmit={submit}>
+        <p className="mad__line">
+          {m.hello}{' '}
+          <Blank name="name" required autoComplete="name" placeholder={m.name} value={data.name} onChange={set('name')} />, {m.work}{' '}
+          <Blank name="company" autoComplete="organization" placeholder={m.company} value={data.company} onChange={set('company')} /> {m.topicIntro}…
+        </p>
+
+        <div className="mad__chips" role="radiogroup" aria-label={m.topicIntro}>
+          {m.topics.map((tp, i) => (
+            <button
+              type="button"
+              key={tp}
+              role="radio"
+              aria-checked={data.topic === i}
+              className={`chip ${data.topic === i ? 'is-on' : ''}`}
+              onClick={() => setData((d) => ({ ...d, topic: i }))}
+              data-cursor="hover"
+            >
+              {tp}
+            </button>
+          ))}
         </div>
 
-        <form className="contact__form" onSubmit={submit}>
-          <label className="field">
-            <span>{f.name}</span>
-            <input required name="name" autoComplete="name" value={data.name} onChange={set('name')} />
-          </label>
-          <label className="field">
-            <span>{f.email}</span>
-            <input required type="email" name="email" autoComplete="email" value={data.email} onChange={set('email')} />
-          </label>
-          <label className="field">
-            <span>{f.company}</span>
-            <input name="company" autoComplete="organization" value={data.company} onChange={set('company')} />
-          </label>
-          <label className="field">
-            <span>{f.message}</span>
-            <textarea required name="message" rows={4} value={data.message} onChange={set('message')} />
-          </label>
-          <button type="submit" className="btn btn--ink btn--big" data-cursor="hover">
-            <span className="btn__label">{f.send}</span>
-            <span className="btn__icon" aria-hidden="true">→</span>
+        <p className="mad__line">
+          {m.reply}{' '}
+          <Blank name="email" type="email" required autoComplete="email" placeholder={m.email} value={data.email} onChange={set('email')} />.
+        </p>
+
+        <label className="mad__note">
+          <span>{m.more}</span>
+          <textarea rows={3} placeholder={m.morePh} value={data.message} onChange={set('message')} />
+        </label>
+
+        <div className="mad__send">
+          <button type="submit" className="send" data-cursor="hover">
+            <span className="send__label">{sent ? '✓' : m.send}</span>
+            <span className="send__arrow" aria-hidden="true">↗</span>
           </button>
-          <p className="contact__note">{f.note}</p>
-        </form>
+          <div className="mad__luigi" aria-hidden="true">
+            <Luigi ref={luigi} variant="sticker" />
+          </div>
+          <div className="confetti-wrap" aria-hidden="true">
+            {Array.from({ length: 14 }).map((_, i) => (
+              <span className="confetti" key={i}>
+                <Truffle flavor={['cacao', 'pistacchio', 'nocciola', 'caramello'][i % 4]} />
+              </span>
+            ))}
+          </div>
+          <p className="mad__status" aria-live="polite">
+            {sent ? m.sent : t.contact.form.note}
+          </p>
+        </div>
+      </form>
+
+      <div className="contact__cards">
+        <div className="contact-card contact-card--green">
+          <p className="contact-card__k">{m.cards.person}</p>
+          <p className="contact-card__v">Giulio Stracquadanio</p>
+        </div>
+        <a className="contact-card contact-card--pink" href={`mailto:${EMAIL}`} data-cursor="hover">
+          <p className="contact-card__k">{m.cards.mail}</p>
+          <p className="contact-card__v">{EMAIL}</p>
+        </a>
+        <a className="contact-card contact-card--red" href={PHONE_HREF} data-cursor="hover">
+          <p className="contact-card__k">{m.cards.phone}</p>
+          <p className="contact-card__v">{PHONE}</p>
+        </a>
       </div>
     </section>
   );
