@@ -718,7 +718,7 @@ blockquote {
   translate: -50% 0;
   width: min(46vw, 34vh * 1.75, 520px);
   height: auto;
-  overflow: visible;
+  overflow: hidden; /* taglia tutto sotto la linea di terra */
 }
 .quote__bloom [data-p='stem'] {
   fill: none;
