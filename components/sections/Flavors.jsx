@@ -39,7 +39,7 @@ export default function Flavors() {
 
         gsap.utils.toArray('.flavor').forEach((panel) => {
           const st = { trigger: panel, containerAnimation: h, start: 'left right', end: 'right left', scrub: true };
-          gsap.fromTo(panel.querySelector('.flavor__truffle'), { rotation: -200, xPercent: 60 }, { rotation: 160, xPercent: -60, ease: 'none', scrollTrigger: st });
+          gsap.fromTo(panel.querySelector('.flavor__truffle'), { rotation: -200, xPercent: 8 }, { rotation: 160, xPercent: -8, ease: 'none', scrollTrigger: st });
           gsap.fromTo(panel.querySelector('.flavor__name'), { xPercent: 8 }, { xPercent: -8, ease: 'none', scrollTrigger: st });
           gsap.fromTo(panel.querySelector('.flavor__tins'), { yPercent: 30, rotation: 8 }, { yPercent: -20, rotation: -6, ease: 'none', scrollTrigger: st });
           gsap.fromTo(panel.querySelector('.flavor__box'), { yPercent: -10, rotation: -12 }, { yPercent: 30, rotation: 4, ease: 'none', scrollTrigger: st });

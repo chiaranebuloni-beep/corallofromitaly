@@ -940,7 +940,7 @@ blockquote {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(200px, 26vw, 420px);
+  width: clamp(200px, 22vw, 360px);
   translate: -50% -50%;
   z-index: 2;
   filter: drop-shadow(0 40px 40px rgba(0, 0, 0, 0.3));
