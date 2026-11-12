@@ -716,7 +716,7 @@ blockquote {
   bottom: 0;
   left: 50%;
   translate: -50% 0;
-  width: min(46vw, 32vh * 1.5, 500px);
+  width: min(40vw, 30vh * 1.7, 440px);
   height: auto;
   overflow: visible;
 }

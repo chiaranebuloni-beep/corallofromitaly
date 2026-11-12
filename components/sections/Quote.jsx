@@ -9,21 +9,23 @@ import Truffle from '../Truffle';
 const part = (id) => LOGO_GROUPS.find((g) => g.id === id).paths;
 
 function Bloom() {
-  // Foglia e fiore identici al logo. Gli steli salgono da terra (297,312) fino al punto
-  // dove si uniscono le foglie (248,253) e i petali (333,250), passando dietro: attacco invisibile.
+  // Foglia e fiore del logo, raddrizzati, che escono dal terreno (niente steli).
+  // I loro gambi originali finiscono sotto la linea di terra.
   return (
-    <svg className="quote__bloom" viewBox="224 200 150 113" aria-hidden="true">
-      <path data-p="stem" d="M297 312.5C292 290 266 276 248.6 253.4" pathLength="1" />
-      <path data-p="stem" d="M297 312.5C302 290 328 279 333.5 250.5" pathLength="1" />
+    <svg className="quote__bloom" viewBox="224 228 146 85.5" aria-hidden="true">
       <g data-p="leaf">
-        {part('leaf').map((p, i) => (
-          <path key={i} d={p.d} fill={p.fill} />
-        ))}
+        <g transform="translate(264 313.5) rotate(-40) translate(-237 -262.6)">
+          {part('leaf').map((p, i) => (
+            <path key={i} d={p.d} fill={p.fill} />
+          ))}
+        </g>
       </g>
       <g data-p="flower">
-        {part('flower').map((p, i) => (
-          <path key={i} d={p.d} fill={p.fill} />
-        ))}
+        <g transform="translate(334 313.5) rotate(45) translate(-358.2 -262.6)">
+          {[...part('stem'), ...part('flower')].map((p, i) => (
+            <path key={i} d={p.d} fill={p.fill} />
+          ))}
+        </g>
       </g>
     </svg>
   );
@@ -51,9 +53,8 @@ export default function Quote() {
           .set('.quote__seed', { y: () => -root.current.querySelector('.quote__stage').offsetHeight * 0.9, rotation: 0, x: 0, scaleX: 1, scaleY: 1, transformOrigin: '50% 100%' })
           .set('.quote__shadow', { scale: 0.15, opacity: 0 })
           .set('.quote__dust', { x: 0, y: 0, opacity: 0, scale: 1 })
-          .set('.quote__bloom [data-p="stem"]', { strokeDashoffset: 1 })
-          .set('.quote__bloom [data-p="flower"]', { scale: 0, rotation: 30, svgOrigin: '333 250' })
-          .set('.quote__bloom [data-p="leaf"]', { scale: 0, rotation: -30, svgOrigin: '248 253' })
+          .set('.quote__bloom [data-p="flower"]', { scale: 0, rotation: 12, svgOrigin: '334 313' })
+          .set('.quote__bloom [data-p="leaf"]', { scale: 0, rotation: -12, svgOrigin: '264 313' })
           // caduta con gravità, l'ombra cresce mentre si avvicina a terra
           .to('.quote__seed', { y: 0, duration: 0.55, ease: 'power3.in' })
           .to('.quote__shadow', { scale: 1, opacity: 0.22, duration: 0.55, ease: 'power3.in' }, '<')
@@ -77,12 +78,10 @@ export default function Quote() {
           // il seme affonda nel terreno
           .to('.quote__seed', { y: () => root.current.querySelector('.quote__seed').offsetHeight * 1.05, duration: 0.35, ease: 'power2.in' }, '+=0.08')
           .to('.quote__shadow', { scale: 0.3, opacity: 0, duration: 0.3 }, '<')
-          .to('.quote__bloom [data-p="stem"]', { strokeDashoffset: 0, duration: 0.45, ease: 'power2.out' }, '>-0.1')
-          .to('.quote__bloom [data-p="flower"]', { scale: 1, rotation: 0, svgOrigin: '333 250', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '>-0.15')
-          .to('.quote__bloom [data-p="leaf"]', { scale: 1, rotation: 0, svgOrigin: '248 253', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '<0.06')
+          .to('.quote__bloom [data-p="flower"]', { scale: 1, rotation: 0, svgOrigin: '334 313', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '>-0.15')
+          .to('.quote__bloom [data-p="leaf"]', { scale: 1, rotation: 0, svgOrigin: '264 313', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '<0.06')
           // resta sbocciato, poi si richiude e ricomincia
-          .to('.quote__bloom [data-p="flower"], .quote__bloom [data-p="leaf"]', { scale: 0, duration: 0.35, ease: 'back.in(1.6)' }, '+=2.6')
-          .to('.quote__bloom [data-p="stem"]', { strokeDashoffset: 1, duration: 0.3, ease: 'power2.in' }, '<0.15');
+          .to('.quote__bloom [data-p="flower"], .quote__bloom [data-p="leaf"]', { scale: 0, duration: 0.35, ease: 'back.in(1.6)' }, '+=2.6');
 
         loop.timeScale(1.6);
         // parte appena la sezione entra nello schermo e non si ferma più
