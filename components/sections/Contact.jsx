@@ -43,7 +43,7 @@ export default function Contact() {
       if (reducedMotion()) return;
       gsap.from('.contact__title .line__inner', { yPercent: 110, stagger: 0.1, duration: 1, ease: 'power4.out', scrollTrigger: { trigger: '.contact__title', start: 'top 85%' } });
       gsap.from('.mad > *', { y: 40, opacity: 0, stagger: 0.06, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.mad', start: 'top 80%' } });
-      gsap.from('.contact-card', { y: 80, rotation: (i) => (i - 1) * 14, opacity: 0, stagger: 0.1, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.contact__cards', start: 'top 90%' } });
+      gsap.from('.crow', { yPercent: 60, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.contact__rows', start: 'top 90%' } });
       gsap.to('.mad__luigi', { y: -8, rotation: 4, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
     },
     { scope: root, dependencies: [t], revertOnUpdate: true }
@@ -154,18 +154,21 @@ export default function Contact() {
         </div>
       </form>
 
-      <div className="contact__cards">
-        <div className="contact-card contact-card--green">
-          <p className="contact-card__k">{m.cards.person}</p>
-          <p className="contact-card__v">Giulio Stracquadanio</p>
+      <div className="contact__rows">
+        <div className="crow">
+          <span className="crow__k">{m.cards.person}</span>
+          <span className="crow__v">Giulio Stracquadanio</span>
+          <span className="crow__icon" aria-hidden="true">✦</span>
         </div>
-        <a className="contact-card contact-card--pink" href={`mailto:${EMAIL}`} data-cursor="hover">
-          <p className="contact-card__k">{m.cards.mail}</p>
-          <p className="contact-card__v">{EMAIL}</p>
+        <a className="crow" href={`mailto:${EMAIL}`} data-cursor="hover">
+          <span className="crow__k">{m.cards.mail}</span>
+          <span className="crow__v">{EMAIL}</span>
+          <span className="crow__icon" aria-hidden="true">↗</span>
         </a>
-        <a className="contact-card contact-card--red" href={PHONE_HREF} data-cursor="hover">
-          <p className="contact-card__k">{m.cards.phone}</p>
-          <p className="contact-card__v">{PHONE}</p>
+        <a className="crow" href={PHONE_HREF} data-cursor="hover">
+          <span className="crow__k">{m.cards.phone}</span>
+          <span className="crow__v">{PHONE}</span>
+          <span className="crow__icon" aria-hidden="true">↗</span>
         </a>
       </div>
     </section>

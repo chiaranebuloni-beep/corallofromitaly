@@ -34,7 +34,6 @@ export default function About() {
       gsap.fromTo('.about__card', { rotation: -9, y: 80 }, { rotation: -2, y: -20, ease: 'none', scrollTrigger: { trigger: '.about__visual', start: 'top bottom', end: 'bottom 30%', scrub: true } });
       gsap.fromTo('.about__card img', { scale: 1.15 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.about__visual', start: 'top bottom', end: 'bottom top', scrub: true } });
       gsap.from('.about__sticker', { scale: 0, rotation: -60, duration: 1, ease: 'back.out(2.2)', scrollTrigger: { trigger: '.about__visual', start: 'top 45%' } });
-      gsap.fromTo('.about__bite', { rotation: -120, y: 120, scale: 0.7 }, { rotation: 60, y: -40, scale: 1, ease: 'none', scrollTrigger: { trigger: '.about__visual', start: 'top bottom', end: 'bottom top', scrub: true } });
       gsap.fromTo('.about__float img', { rotation: -90, y: 80 }, { rotation: 200, y: -120, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'center top', scrub: true } });
       gsap.from('.about__label', { x: -40, opacity: 0, duration: 0.8, scrollTrigger: { trigger: root.current, start: 'top 75%' } });
     },
@@ -67,7 +66,6 @@ export default function About() {
           <figure className="about__card">
             <img src="/img/post-morso.webp" alt="Un morso a un truffle al pistacchio Corallo" loading="lazy" />
           </figure>
-          <img className="about__bite" src="/img/truffle-pistacchio.webp" alt="" aria-hidden="true" loading="lazy" />
           <span className="about__sticker">{t.flavors.handmade}</span>
         </div>
         <p className="about__text">
