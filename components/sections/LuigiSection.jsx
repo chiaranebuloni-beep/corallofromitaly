@@ -5,8 +5,9 @@ import { useLang } from '@/lib/lang';
 import { Line } from '../Split';
 import Luigi from '../Luigi';
 import { luigiIdle } from '@/lib/luigiAnim';
+import Truffle from '../Truffle';
 
-const CARDS = ['/img/post-luigi-01.webp', '/img/post-luigi-02.webp', '/img/post-emozioni.webp', '/img/post-specchio.webp'];
+const CARDS = ['/img/post-luigi-01.webp', '/img/post-luigi-02.webp', 'card-03'];
 const TILT = [-4, 5, -7, 3];
 
 export default function LuigiSection() {
@@ -61,7 +62,11 @@ export default function LuigiSection() {
           .to(cards.slice(i + 1), { y: (j) => j * 10, scale: (j) => 1 - j * 0.04, rotation: (j) => (j === 0 ? 0 : TILT[i + 1 + j]), duration: 0.6, ease: 'power2.out' }, '-=0.4')
           .to(lessons[i], { yPercent: -100, opacity: 0, duration: 0.4 }, '<')
           .to(lessons[i + 1], { yPercent: 0, opacity: 1, duration: 0.4 }, '<0.1')
-          .to('.deck__count b', { textContent: String(i + 2).padStart(2, '0'), snap: { textContent: 1 }, duration: 0.01 }, '<');
+          .to({}, {
+            duration: 0.01,
+            onStart: () => (root.current.querySelector('.deck__count b').textContent = String(i + 2).padStart(2, '0')),
+            onReverseComplete: () => (root.current.querySelector('.deck__count b').textContent = String(i + 1).padStart(2, '0')),
+          }, '<');
       });
       tl.to({}, { duration: 0.4 });
     },
@@ -107,11 +112,35 @@ export default function LuigiSection() {
           <p className="deck__hint">{t.luigi.deckHint}</p>
         </div>
         <div className="deck__stack">
-          {CARDS.map((src, i) => (
-            <figure className="deck__card" key={src}>
-              <img src={src} alt={`${t.luigi.lessonLabel} ${t.luigi.lessons[i].n}: ${t.luigi.lessons[i].t}`} loading="lazy" draggable="false" />
-            </figure>
-          ))}
+          {CARDS.map((src, i) =>
+            src === 'card-03' ? (
+              <figure className="deck__card lesson3" key={src} aria-label={`${t.luigi.lessonLabel} 03: ${t.luigi.lessons[2].t}`}>
+                <div className="lesson3__top">
+                  <span>
+                    CORALLO
+                    <br />
+                    FROM ITALY
+                  </span>
+                  <span>“{t.luigi.lessonLabel.toUpperCase()}”</span>
+                </div>
+                <div className="lesson3__head">
+                  <span className="lesson3__n">03</span>
+                  <span className="lesson3__t">{t.luigi.lessons[2].t}</span>
+                </div>
+                <div className="lesson3__art">
+                  <Luigi variant="mascot" className="lesson3__luigi" />
+                  <div className="lesson3__mystery">
+                    <Truffle flavor="caramello" />
+                    <span>?</span>
+                  </div>
+                </div>
+              </figure>
+            ) : (
+              <figure className="deck__card" key={src}>
+                <img src={src} alt={`${t.luigi.lessonLabel} ${t.luigi.lessons[i].n}: ${t.luigi.lessons[i].t}`} loading="lazy" draggable="false" />
+              </figure>
+            )
+          )}
         </div>
       </div>
     </section>

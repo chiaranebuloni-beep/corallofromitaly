@@ -12,7 +12,6 @@ import About from './sections/About';
 import Quote from './sections/Quote';
 import LuigiSection from './sections/LuigiSection';
 import Flavors from './sections/Flavors';
-import Gallery from './sections/Gallery';
 import Catalogue from './sections/Catalogue';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
@@ -76,7 +75,6 @@ export default function Site() {
         <Quote />
         <Flavors />
         <LuigiSection />
-        <Gallery />
         <Catalogue />
         <Contact />
       </main>

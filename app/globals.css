@@ -2038,3 +2038,72 @@ blockquote {
     font-size: 26px;
   }
 }
+
+/* carta 03 disegnata (stile dei post "Luigi insegna") */
+.lesson3 {
+  display: flex;
+  flex-direction: column;
+  padding: 7% 7% 0;
+  background: var(--white);
+  color: var(--red);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.lesson3__top {
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(9px, 0.9vw, 13px);
+  line-height: 0.95;
+}
+.lesson3__head {
+  display: flex;
+  align-items: center;
+  gap: 6%;
+  margin-top: 11%;
+}
+.lesson3__n {
+  font-size: clamp(60px, 7.4vw, 108px);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.lesson3__t {
+  font-size: clamp(13px, 1.35vw, 20px);
+  line-height: 1;
+}
+.lesson3__art {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4%;
+  padding-bottom: 6%;
+}
+.lesson3__luigi {
+  width: 46%;
+  height: auto;
+  overflow: visible;
+}
+.lesson3__mystery {
+  position: relative;
+  width: 26%;
+  aspect-ratio: 1;
+  margin-bottom: 2%;
+  animation: wobble 1.6s ease-in-out infinite;
+}
+.lesson3__mystery span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--paper);
+  font-size: clamp(28px, 3vw, 46px);
+  font-family: var(--font-fallback), sans-serif;
+  font-weight: 900;
+}
+@keyframes wobble {
+  50% {
+    transform: rotate(-10deg) translateY(-6px);
+  }
+}
