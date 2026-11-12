@@ -1652,8 +1652,10 @@ blockquote {
   pointer-events: none;
 }
 .heroB__word {
-  clip-path: inset(-100vh -100vw 0 -100vw);
-  padding-bottom: 0.1em;
+  /* maschera compatibile con Safari: le lettere salgono da sotto la base */
+  overflow: hidden;
+  padding: 0.6em 0 0.06em;
+  margin-top: -0.6em;
 }
 .heroB__letter {
   display: inline-block;
@@ -1662,8 +1664,8 @@ blockquote {
 .heroB__luigi {
   position: relative;
   z-index: 3;
-  width: min(46vh, 64vw);
-  margin-top: 6vh;
+  width: min(62vh, 52vw);
+  margin-top: 2vh;
 }
 .heroB__sticker {
   position: relative;
@@ -1721,7 +1723,7 @@ blockquote {
   position: absolute;
   left: var(--gutter);
   right: var(--gutter);
-  bottom: calc(var(--gutter) + 24px);
+  bottom: 16px;
   z-index: 8;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -1773,12 +1775,12 @@ blockquote {
     translate: 0 0;
   }
   .heroB__luigi {
-    width: min(48vh, 70vw);
+    width: min(52vh, 84vw);
     margin-top: 14vh;
   }
   .heroB__bottom {
     grid-template-columns: 1fr 1fr;
-    bottom: calc(var(--gutter) + 24px);
+    bottom: 14px;
   }
   .heroB__tagline {
     display: none;
@@ -1796,14 +1798,13 @@ blockquote {
   position: relative;
   z-index: 4;
   height: clamp(220px, 26vw, 420px);
-  margin: -24px 0 clamp(-210px, -13vw, -110px);
+  margin: 0 0 clamp(-210px, -13vw, -110px);
   pointer-events: none;
 }
 .ribbon {
   /* parte alta trasparente dove si sovrappone alla hero, poi rosso, poi verde */
   background: linear-gradient(
-    transparent 0 24px,
-    var(--red) 24px 50%,
+    var(--red) 0 50%,
     var(--green) 50%
   );
 }
@@ -1844,7 +1845,7 @@ blockquote {
 @media (max-width: 899px) {
   .ribbon {
     height: 200px;
-    margin: -24px 0 -90px;
+    margin: 0 0 -90px;
   }
 }
 
