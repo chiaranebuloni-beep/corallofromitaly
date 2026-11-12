@@ -925,7 +925,7 @@ blockquote {
   position: absolute;
   left: 0;
   right: 0;
-  top: 46%;
+  top: 50%;
   margin-top: -0.55em;
   text-align: center;
   white-space: nowrap;
@@ -937,10 +937,10 @@ blockquote {
   padding: 0.04em 0;
 }
 .flavor__truffle {
-  --tw: clamp(200px, 20vw, 330px);
+  --tw: clamp(190px, 18vw, 300px);
   position: absolute;
   left: 50%;
-  top: 72%;
+  top: 76%;
   width: var(--tw);
   margin: calc(var(--tw) / -2) 0 0 calc(var(--tw) / -2);
   z-index: 2;
