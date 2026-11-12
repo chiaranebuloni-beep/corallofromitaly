@@ -2298,3 +2298,14 @@ a.crow:hover .crow__icon {
     grid-column: 1 / -1;
   }
 }
+
+/* grana della carta anche nelle sezioni con sfondo crema pieno */
+.quote,
+.flavors__intro,
+.intro {
+  background-color: var(--paper);
+  background-image: url('/img/paper.webp');
+  background-size: 900px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
