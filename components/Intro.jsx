@@ -55,7 +55,7 @@ export default function Intro({ onDone, finalColor = 'var(--paper)' }) {
         .to('.intro__num', { '--waff': 2, duration: 2.4, ease: 'none' }, 0.2)
         // fine: i tartufi cadono, Luigi salta via
         .add(() => juggle.pause())
-        .to('.intro__ball', { yPercent: 900, rotation: 200, duration: 0.6, stagger: 0.06, ease: 'power2.in' })
+        .to('.intro__ball', { y: () => window.innerHeight, rotation: 200, autoAlpha: 0, duration: 0.6, stagger: 0.06, ease: 'power2.in' })
         .to('.intro__luigi', { yPercent: -30, duration: 0.25, ease: 'power2.out' }, '<')
         .to('.intro__luigi', { yPercent: 160, duration: 0.5, ease: 'power3.in' })
         .to('.intro__brand .c, .intro__tag, .intro__num', { yPercent: 110, opacity: 0, duration: 0.4, stagger: 0.01, ease: 'power3.in' }, '<')

@@ -57,7 +57,6 @@ export default function HeroB({ ready }) {
             scale: sc,
             zIndex: z > 0 ? 6 : 1,
             rotation: a * 40,
-            filter: `blur(${(1 - (z + 1) / 2) * 3}px)`,
           });
         });
       };

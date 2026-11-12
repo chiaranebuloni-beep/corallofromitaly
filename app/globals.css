@@ -1669,6 +1669,8 @@ blockquote {
   width: clamp(54px, 7vw, 110px);
   margin: calc(clamp(54px, 7vw, 110px) / -2);
   filter: drop-shadow(0 14px 16px rgba(60, 10, 5, 0.3));
+  image-rendering: auto;
+  backface-visibility: hidden;
 }
 .heroB__chip {
   position: absolute;
