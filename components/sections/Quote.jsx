@@ -9,20 +9,22 @@ import Truffle from '../Truffle';
 const part = (id) => LOGO_GROUPS.find((g) => g.id === id).paths;
 
 function Bloom() {
-  // Foglia e fiore del logo, raddrizzati, che escono dal terreno (niente steli).
-  // I loro gambi originali finiscono sotto la linea di terra.
+  // Le mani di Luigi spuntano dal terreno tenendo foglia e fiore, esattamente come nel logo.
+  // Il terreno taglia i polsini (y = 303): il resto di Luigi è "sotto terra".
+  const cuffs = part('body').slice(0, 4);
   return (
-    <svg className="quote__bloom" viewBox="224 228 146 85.5" aria-hidden="true">
-      <g data-p="leaf">
-        <g transform="translate(264 313.5) rotate(-40) translate(-237 -262.6)">
+    <svg className="quote__bloom" viewBox="212 205 172 98" aria-hidden="true">
+      <g data-p="hands">
+        {[...cuffs, ...part('hands'), ...part('stem')].map((p, i) => (
+          <path key={'h' + i} d={p.d} fill={p.fill} />
+        ))}
+        <g data-p="leaf">
           {part('leaf').map((p, i) => (
             <path key={i} d={p.d} fill={p.fill} />
           ))}
         </g>
-      </g>
-      <g data-p="flower">
-        <g transform="translate(334 313.5) rotate(45) translate(-358.2 -262.6)">
-          {[...part('stem'), ...part('flower')].map((p, i) => (
+        <g data-p="flower">
+          {part('flower').map((p, i) => (
             <path key={i} d={p.d} fill={p.fill} />
           ))}
         </g>
@@ -53,8 +55,9 @@ export default function Quote() {
           .set('.quote__seed', { y: () => -root.current.querySelector('.quote__stage').offsetHeight * 0.9, rotation: 0, x: 0, scaleX: 1, scaleY: 1, transformOrigin: '50% 100%' })
           .set('.quote__shadow', { scale: 0.15, opacity: 0 })
           .set('.quote__dust', { x: 0, y: 0, opacity: 0, scale: 1 })
-          .set('.quote__bloom [data-p="flower"]', { scale: 0, rotation: 12, svgOrigin: '334 313' })
-          .set('.quote__bloom [data-p="leaf"]', { scale: 0, rotation: -12, svgOrigin: '264 313' })
+          .set('.quote__bloom [data-p="hands"]', { y: 110 })
+          .set('.quote__bloom [data-p="leaf"]', { rotation: 0, svgOrigin: '244 266' })
+          .set('.quote__bloom [data-p="flower"]', { rotation: 0, svgOrigin: '318 262' })
           // caduta con gravità, l'ombra cresce mentre si avvicina a terra
           .to('.quote__seed', { y: 0, duration: 0.55, ease: 'power3.in' })
           .to('.quote__shadow', { scale: 1, opacity: 0.22, duration: 0.55, ease: 'power3.in' }, '<')
@@ -78,10 +81,12 @@ export default function Quote() {
           // il seme affonda nel terreno
           .to('.quote__seed', { y: () => root.current.querySelector('.quote__seed').offsetHeight * 1.05, duration: 0.35, ease: 'power2.in' }, '+=0.08')
           .to('.quote__shadow', { scale: 0.3, opacity: 0, duration: 0.3 }, '<')
-          .to('.quote__bloom [data-p="flower"]', { scale: 1, rotation: 0, svgOrigin: '334 313', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '>-0.15')
-          .to('.quote__bloom [data-p="leaf"]', { scale: 1, rotation: 0, svgOrigin: '264 313', ease: 'elastic.out(1, 0.7)', duration: 0.8 }, '<0.06')
+          .to('.quote__bloom [data-p="hands"]', { y: 0, duration: 0.7, ease: 'back.out(1.5)' }, '>-0.1')
+          // foglia e fiore salutano
+          .to('.quote__bloom [data-p="leaf"]', { rotation: -10, duration: 0.3, yoyo: true, repeat: 3, ease: 'sine.inOut' })
+          .to('.quote__bloom [data-p="flower"]', { rotation: 10, duration: 0.3, yoyo: true, repeat: 3, ease: 'sine.inOut' }, '<')
           // resta sbocciato, poi si richiude e ricomincia
-          .to('.quote__bloom [data-p="flower"], .quote__bloom [data-p="leaf"]', { scale: 0, duration: 0.35, ease: 'back.in(1.6)' }, '+=2.6');
+          .to('.quote__bloom [data-p="hands"]', { y: 110, duration: 0.45, ease: 'back.in(1.4)' }, '+=1.6');
 
         loop.timeScale(1.6);
         // parte appena la sezione entra nello schermo e non si ferma più
