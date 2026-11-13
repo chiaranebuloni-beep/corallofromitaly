@@ -2582,3 +2582,18 @@ html {
     padding: 5px 6px;
   }
 }
+
+/* hero mobile: niente "scorri", frase centrata */
+@media (max-width: 899px) {
+  .heroB__bottom {
+    justify-content: center;
+    text-align: center;
+  }
+  .heroB__scroll {
+    display: none;
+  }
+  .heroB__kicker {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+}
