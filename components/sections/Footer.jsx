@@ -58,13 +58,16 @@ export default function Footer() {
           </div>
           <div className="footer__right">
             <a href="#top" data-cursor="hover">{t.footer.top} <Arrow dir="up" /></a>
-            <a href="/privacy" data-cursor="hover">{t.footer.privacy}</a>
-            <p className="footer__small">© {new Date().getFullYear()} Corallo from Italy. {t.footer.rights}</p>
-            <p className="footer__small">
-              {LEGAL.owner} · {LEGAL.city}
-              {LEGAL.vat ? ` · ${t.footer.vat} ${LEGAL.vat}` : ''}
-            </p>
           </div>
+        </div>
+        <div className="footer__legal">
+          <p>© {new Date().getFullYear()} Corallo from Italy. {t.footer.rights}</p>
+          <p>
+            {LEGAL.owner} · {LEGAL.city}
+            {LEGAL.vat ? ` · ${t.footer.vat} ${LEGAL.vat}` : ''}
+            {' · '}
+            <a href="/privacy" data-cursor="hover">{t.footer.privacy}</a>
+          </p>
         </div>
       </div>
     </footer>

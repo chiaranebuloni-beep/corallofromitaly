@@ -2664,3 +2664,53 @@ html {
 .legal a:not(.legal__back) {
   text-decoration: underline;
 }
+
+/* footer più compatto + riga legale lunga in fondo */
+.footer__inner {
+  padding-top: clamp(48px, 5vw, 72px);
+  gap: clamp(32px, 4vw, 48px);
+}
+.footer__logo {
+  width: min(300px, 62vw);
+}
+.footer__legal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  flex-wrap: wrap;
+  margin-top: calc(clamp(32px, 4vw, 48px) * -0.4);
+  padding-top: 18px;
+  border-top: 1px solid rgba(247, 244, 238, 0.18);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(247, 244, 238, 0.55);
+}
+.footer__legal a {
+  color: var(--paper);
+}
+.footer__legal a:hover {
+  color: var(--green);
+}
+@media (max-width: 899px) {
+  .footer__legal {
+    flex-direction: column;
+  }
+}
+@media (max-width: 899px) {
+  .footer__logo {
+    width: min(220px, 52vw);
+  }
+  .footer__cols {
+    gap: 18px;
+  }
+  .footer__cols > div:first-child {
+    display: none;
+  }
+  .footer__legal {
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    gap: 6px;
+  }
+}
