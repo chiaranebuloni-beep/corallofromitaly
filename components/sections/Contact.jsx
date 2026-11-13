@@ -50,24 +50,17 @@ export default function Contact() {
     { scope: root, dependencies: [t], revertOnUpdate: true }
   );
 
+  // Per ora (demo) non apre nulla: festa e messaggio di grazie.
+  // Quando si collega l'invio vero, spedire qui nome, argomento, email e messaggio.
   const submit = (e) => {
     e.preventDefault();
-    const topic = m.topics[data.topic];
-    const body = [
-      `${m.hello} ${data.name} ${m.topicIntro} ${topic}.`,
-      '',
-      data.message,
-      '',
-      `${m.reply} ${data.email}`,
-    ].join('\n');
-    const subject = `${t.contact.form.subject} — ${topic} — ${data.name}`;
     setSent(true);
+    setTimeout(() => setData({ name: '', company: '', topic: 0, email: '', message: '' }), 1200);
 
     // festa: Luigi salta e piovono tartufi
-    const go = () => (window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-    if (reducedMotion()) return go();
+    if (reducedMotion()) return;
     const q = root.current;
-    gsap.timeline({ onComplete: go })
+    gsap.timeline()
       .to('.mad__luigi', { y: -60, rotation: -10, duration: 0.25, ease: 'power2.out' })
       .to('.mad__luigi', { y: 0, rotation: 0, duration: 0.6, ease: 'bounce.out' })
       .fromTo(

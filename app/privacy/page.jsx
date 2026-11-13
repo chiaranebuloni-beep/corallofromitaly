@@ -22,8 +22,8 @@ export default function Privacy() {
         </p>
         <h3>Quali dati raccogliamo</h3>
         <p>
-          Il modulo contatti non salva nulla sul sito: compone un’email che invii tu dal tuo programma di posta. Riceviamo
-          quindi solo i dati che scegli di scriverci (nome, indirizzo email, messaggio). Il server che ospita il sito
+          Quando ci scrivi tramite il modulo contatti o via email riceviamo solo i dati che scegli di inserire (nome,
+          indirizzo email, messaggio). Il server che ospita il sito
           (Vercel) registra dati tecnici di navigazione, come l’indirizzo IP, per motivi di sicurezza e funzionamento.
         </p>
         <h3>Perché e per quanto tempo</h3>
@@ -52,8 +52,8 @@ export default function Privacy() {
           {LEGAL.vat ? `, VAT ${LEGAL.vat}` : ''}. Contact: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
         </p>
         <p>
-          The contact form stores nothing on the website: it prepares an email that you send from your own mail app, so we
-          only receive what you choose to write (name, email address, message). Our hosting provider (Vercel) logs
+          When you contact us through the form or by email we only receive what you choose to write (name, email address,
+          message). Our hosting provider (Vercel) logs
           technical data such as IP addresses for security and operation. We use your data only to reply to your request,
           keep it only as long as needed and never sell it. The site uses no profiling cookies or analytics: your browser
           only stores your language and whether you have already seen the opening animation. You can ask to access,

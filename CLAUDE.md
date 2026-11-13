@@ -22,7 +22,7 @@ ink #1d1d1b · rosso #e63329 · verde #9ac43c · rosa #f6b1af
 
 ## Da sapere
 - **Font Forno**: in `public/fonts` c'è la versione TRIAL (licenza "Personal Use Only", senza lettere accentate né virgolette tipografiche). I caratteri mancanti cadono su Archivo (Google Fonts). Prima di andare online serve la licenza web del Forno: sostituire `public/fonts/forno-var.woff2`.
-- Il modulo contatti non ha server: apre il programma di posta con il messaggio precompilato verso info@corallofromitaly.com.
+- Il modulo contatti per ora (demo) non invia e non apre nulla: Luigi salta, piovono tartufi e compare "Grazie! Ti rispondiamo presto.". Da collegare a un invio vero prima di andare online (punto segnato in `Contact.jsx`).
 - Il caramello usa la foto del truffle al cacao: anche il catalogo ufficiale usa la stessa identica foto.
 - Dati legali in `lib/i18n.js` (`LEGAL`): produttore D.I. Giulio Stracquadanio, Modica (RG). La P.IVA non è pubblica online (06028720875 è di Sicilus, il rivenditore): appena il cliente la manda, metterla in `LEGAL.vat` e compare da sola nel footer e in `/privacy`. La pagina privacy (`app/privacy/page.jsx`) è da far verificare al cliente.
 - Caricamento: Luigi giocoliere con i tartufi stilizzati (`components/Truffle.jsx`), poi esplosione di cerchi colorati. Si vede solo alla prima visita (localStorage `corallo-intro-seen`); per rivederlo aggiungere `?intro` all'indirizzo.
