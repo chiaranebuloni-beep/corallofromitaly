@@ -583,7 +583,7 @@ blockquote {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 99;
   background: var(--red);
   color: var(--paper);
   display: flex;
@@ -609,11 +609,11 @@ blockquote {
   margin-top: 24px;
   align-self: flex-start;
 }
-.is-open .mobile-menu {
+.mobile-menu.is-open {
   clip-path: circle(150% at calc(100% - 40px) 38px);
   pointer-events: auto;
 }
-.is-open .mobile-menu a:not(.btn) {
+.mobile-menu.is-open a:not(.btn) {
   transform: none;
   opacity: 1;
 }
@@ -2596,4 +2596,24 @@ html {
     flex: 0 0 100%;
     text-align: center;
   }
+}
+
+/* menu mobile aperto: header trasparente sopra il rosso */
+.header.is-open {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.header.is-open .header__word {
+  color: var(--paper);
+}
+.header.is-open .lang {
+  background: rgba(247, 244, 238, 0.2);
+}
+.header.is-open .lang__btn {
+  color: var(--paper);
+}
+.header.is-open .lang__btn.is-active {
+  color: var(--ink);
 }

@@ -55,6 +55,7 @@ export default function Header() {
   ];
 
   return (
+    <>
     <header ref={ref} className={`header ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
       <a href="#top" className="header__logo" aria-label="Corallo from Italy" data-cursor="hover">
         <Luigi variant="mascot" className="header__luigi" />
@@ -107,8 +108,9 @@ export default function Header() {
           <span />
         </button>
       </div>
+    </header>
 
-      <div className="mobile-menu" aria-hidden={!open}>
+      <div className={`mobile-menu ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         {links.map(([href, label], i) => (
           <a key={href} href={href} onClick={() => setOpen(false)} style={{ '--i': i }}>
             {label}
@@ -116,6 +118,6 @@ export default function Header() {
         ))}
 
       </div>
-    </header>
+    </>
   );
 }
