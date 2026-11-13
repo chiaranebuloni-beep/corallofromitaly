@@ -58,7 +58,15 @@ export const viewport = { themeColor: '#e63329' };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={`has-heroB ${forno.variable} ${fornoVar.variable} ${archivo.variable}`}>
+    <html lang="it" className={`has-heroB ${forno.variable} ${fornoVar.variable} ${archivo.variable}`} suppressHydrationWarning>
+      <head>
+        {/* intro già vista: nascondila prima del primo disegno */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{if(localStorage.getItem('corallo-intro-seen')==='1'&&location.search.indexOf('intro')<0)document.documentElement.classList.add('intro-seen')}catch(e){}",
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

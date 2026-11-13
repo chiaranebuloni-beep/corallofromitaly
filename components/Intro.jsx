@@ -12,7 +12,13 @@ export default function Intro({ onDone, finalColor = 'var(--paper)' }) {
 
   useGSAP(
     () => {
-      if (reducedMotion()) {
+      // solo alla prima visita (per rivederlo: ?intro nell'indirizzo)
+      let seen = false;
+      try {
+        seen = localStorage.getItem('corallo-intro-seen') === '1' && !location.search.includes('intro');
+        localStorage.setItem('corallo-intro-seen', '1');
+      } catch {}
+      if (reducedMotion() || seen) {
         setGone(true);
         onDone();
         return;
@@ -48,11 +54,11 @@ export default function Intro({ onDone, finalColor = 'var(--paper)' }) {
         .from('.intro__tag', { opacity: 0, duration: 0.6 }, 0.5)
         .to(count, {
           v: 100,
-          duration: 2.4,
+          duration: 1.5,
           ease: 'power1.inOut',
           onUpdate: () => (num.textContent = String(Math.round(count.v)).padStart(3, '0')),
         }, 0.2)
-        .to('.intro__num', { '--waff': 2, duration: 2.4, ease: 'none' }, 0.2)
+        .to('.intro__num', { '--waff': 2, duration: 1.5, ease: 'none' }, 0.2)
         // fine: i tartufi cadono, Luigi salta via
         .add(() => juggle.pause())
         .to('.intro__ball', { y: () => window.innerHeight, rotation: 200, autoAlpha: 0, duration: 0.6, stagger: 0.06, ease: 'power2.in' })
